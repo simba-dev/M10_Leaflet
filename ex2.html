@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <div id="map" style="width: 600px; height: 400px; "></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script>
+        var map = L.map('map', {
+            center: [41.387086, 2.169985],
+            zoom: 16
+        });
+    
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+        }).addTo(map);
+        var markerGroup = L.layerGroup().addTo(map)
+        map.on('click', addMarker);
+
+        
+
+        function addMarker(e) {
+            // Add marker to map at click location; add popup window
+            markerGroup.clearLayers();
+            var newMarker = new L.marker(e.latlng).addTo(markerGroup);
+            map.setView(e.latlng, 19);
+            newMarker.bindPopup(map.getCenter().toString()).openPopup();
+        }
+
+
+    </script>
+</body>
+
+
+
+
+</html>
